@@ -108,3 +108,20 @@ export function toInt(v: any) {
 export function toBool(v: any) {
     return String(v) === "true";
 }
+
+
+let eventObj = {};
+const on = (name,fn)=>{
+    if(!eventObj[name]){
+        eventObj[name] = [];
+    }
+    eventObj[name].push(fn);
+}
+
+const emit = (name,val)=>{
+    if(eventObj[name]){
+        eventObj[name].map((fn)=>{
+            fn(val);
+        });
+    }
+}
